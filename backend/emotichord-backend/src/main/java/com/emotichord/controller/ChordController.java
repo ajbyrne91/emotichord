@@ -1,27 +1,23 @@
-/**
- * 
- */
 package com.emotichord.controller;
 
+import com.emotichord.model.ChordProgression;
+import com.emotichord.service.MusicService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*") // Allow frontend to connect later
-
-/**
- * ChordController
- * 
- * @author alexbyrne
- * @version 1.0
- * @since 25 Nov 2025
- */
+@CrossOrigin(origins = "*")
 public class ChordController {
 
-	    @GetMapping("/generate")
-	    public String generateChord(@RequestParam("emotion") String emotion) {
-	        return "You requested music for emotion: " + emotion + "! 🎵";
+    private final MusicService musicService;
+    
+    // Spring will automatically inject the MusicService
+    public ChordController(MusicService musicService) {
+        this.musicService = musicService;
+    }
 
-	}
-
+    @GetMapping("/generate")
+    public ChordProgression generateChord(@RequestParam("emotion") String emotion) {
+        return musicService.getProgressionForEmotion(emotion);
+    }
 }

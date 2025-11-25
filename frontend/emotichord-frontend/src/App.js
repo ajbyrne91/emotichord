@@ -11,8 +11,8 @@ function App() {
     
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:62614/api/generate?emotion=${emotion}`);
-      const data = await response.text();
+      const response = await fetch(`http://localhost:62951/api/generate?emotion=${emotion}`);
+      const data = await response.json();
       setChordProgression(data);
     } catch (error) {
       console.error('Error generating music:', error);
@@ -46,11 +46,17 @@ function App() {
         </div>
 
         {chordProgression && (
-          <div className="result-section">
-            <h3>Your Chord Progression:</h3>
-            <p className="chord-result">{chordProgression}</p>
-          </div>
-        )}
+  <div className="result-section">
+    <h3>🎵 Your Chord Progression</h3>
+    <div className="chord-details">
+      <p><strong>Key:</strong> {chordProgression.key}</p>
+      <p><strong>Progression:</strong> {chordProgression.progression}</p>
+      <p><strong>Tempo:</strong> {chordProgression.tempo} BPM</p>
+      <p><strong>Style:</strong> {chordProgression.style}</p>
+      <p><strong>Mood:</strong> {chordProgression.description}</p>
+    </div>
+  </div>
+)}
       </header>
     </div>
   );
