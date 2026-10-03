@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.emotichord'
 version = '0.0.1-SNAPSHOT'
-description = 'AI-powered emotional music generator'
+description = 'Mood-based chord progression prototype'
 
 java {
 	toolchain {
